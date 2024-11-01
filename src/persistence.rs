@@ -45,14 +45,12 @@ impl<const D: usize, const T: usize> VietorisRips<D,T>{
                 if self.skeleton[a0][a1]{
                     for a2 in a1..self.pts{
                         if self.skeleton[a1][a2] && self.skeleton[a0][a2] && !triangles.contains(&[a0,a1,a2]){
-                            // a0 - a1 - a2
                             triangles.push([a0,a1,a2]);
                             self.raw_complex.push(Simplex{
                                 value: vec![a0,a1,a2],
                                 dimension: 2
                             });
                             added_2_simplex = true;
-                            //println!("~ ( ε = {} ) 2-simplex {}-{}-{} ", self.ε, a0, a1, a2);
                         }
                     }
                 }
@@ -73,7 +71,6 @@ impl<const D: usize, const T: usize> VietorisRips<D,T>{
                                         value: vec![a0,a1,a2,a3],
                                         dimension: 3
                                     });
-                                    //println!("~ ( ε = {} ) 3-simplex {}-{}-{}-{}", self.ε, a0, a1, a2, a3);
                                 }
                             }
                         }
@@ -113,7 +110,6 @@ impl<const D: usize, const T: usize> VietorisRips<D,T>{
                         self.skeleton[point.item as usize][i as usize] = true;
 
                         added_1_simplex = true;
-                        //println!("~ ( ε = {} ) 1-simplex {}-{}", self.ε, i, point.item);
                     }
                 }
             }
