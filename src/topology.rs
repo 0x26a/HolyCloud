@@ -12,8 +12,8 @@ const TOL: f64 = 0.000001;
 #[derive(PartialEq)]
 pub enum Ring{
 	TRIVIAL,
-	R, // R
-	Z, // Z
+	R, 
+	Z, 
 }
 pub type Rank = usize;
 pub type Torsion = Vec<usize>;
@@ -36,7 +36,7 @@ pub struct SimplicialComplex{
 	pub ring: Ring,
 	simplicies : Vec<Simplex>,
 	pub dimension: usize,
-	chains: Vec<Vec<Simplex>> //chains[n] = basis of A free module C_n
+	chains: Vec<Vec<Simplex>>
 
 }
 
@@ -90,7 +90,6 @@ impl SimplicialComplex{
 				let mut vec_of_mat: Vec<f64> = Vec::new();
 				for simplex in self.chains[n].iter(){
 					let mut coord = self.boundary_basis(n, q, simplex);
-					// println!("∂({}) = {:?}", simplex.value, coord);
 					vec_of_mat.append(&mut coord);
 				}
 				DMatrix::from_vec(q,p,vec_of_mat)
@@ -108,7 +107,6 @@ impl SimplicialComplex{
 		while i < l{
 			value.remove(i);
 			for s in &self.chains[n-1]{
-				//println!("{:?} == {:?}", s.value, value);
 				if s.value == value{ break; }
 				position += 1
 			}
