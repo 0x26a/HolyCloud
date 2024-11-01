@@ -27,7 +27,7 @@ let mut vr = VietorisRips::<3, 2>::init(two_circles);
 // vr.analyse(ring, radius limit, radius step)
 let data = vr.analyze(Ring::R, 20.0, 0.5);
 for modules in data{
-  println!("\nHOMOLOGICAL DATA ( persistence={} )", modules.end - module.start);
+  println!("\nHOMOLOGICAL DATA ( persistence={} )", modules.end - modules.start);
   for i in 0..2{
     println!("\tdim H_{} = {} | T(H_{}) = {:?}", i, modules.ranks[i],i, modules.torsions[i]);
   }
