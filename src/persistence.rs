@@ -96,7 +96,6 @@ impl<const D: usize, const T: usize> VietorisRips<D,T>{
 
         self.ε = 0.0;
         while self.ε <= end{
-            println!("ε={}", self.ε);
             for (i,pos) in self.tree.iter(){
                 let nbhd = self.tree.within::<Manhattan>(&pos,self.ε);
                 for point in nbhd{
