@@ -1,0 +1,9 @@
+[package]
+name = "holycloud"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+kiddo = "4.1.0"
+nalgebra = "0.33.1"
+nalgebra-lapack = "0.25.0"
