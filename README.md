@@ -19,16 +19,16 @@ Persistent homology of a sphere-like point cloud in 3D:
 use holycloud::topology::Ring;
 use holycloud::persistence::VietorisRips;
 
-let sphere = vec![[5.000000000000001, 5.000000000000001, 7.0710678118654755], [7.0710678118654755, 7.0710678118654755, 6.123233995736766e-16], [5.000000000000001, 5.000000000000001, -7.071067811865475], [4.329780281177467e-16, 7.0710678118654755, 7.0710678118654755], [6.123233995736766e-16, 10.0, 6.123233995736766e-16], [4.329780281177467e-16, 7.0710678118654755, -7.071067811865475], [-5.0, 5.000000000000001, 7.0710678118654755], [-7.071067811865475, 7.0710678118654755, 6.123233995736766e-16], [-5.0, 5.000000000000001, -7.071067811865475], [-7.0710678118654755, 8.659560562354934e-16, 7.0710678118654755], [-10.0, 1.2246467991473533e-15, 6.123233995736766e-16], [-7.0710678118654755, 8.659560562354934e-16, -7.071067811865475], [-5.000000000000002, -5.0, 7.0710678118654755], [-7.071067811865477, -7.071067811865475, 6.123233995736766e-16], [-5.000000000000002, -5.0, -7.071067811865475], [-1.2989340843532398e-15, -7.0710678118654755, 7.0710678118654755], [-1.8369701987210296e-15, -10.0, 6.123233995736766e-16], [-1.2989340843532398e-15, -7.0710678118654755, -7.071067811865475], [4.999999999999999, -5.000000000000002, 7.0710678118654755], [7.071067811865474, -7.071067811865477, 6.123233995736766e-16], [4.999999999999999, -5.000000000000002, -7.071067811865475]];
+let two_circles = vec![[4.504844339512096, 2.1694186955877908, 10.0], [3.1174490092936677, 3.909157412340149, 10.0], [1.1126046697815721, 4.874639560909118, 10.0], [-1.1126046697815717, 4.874639560909118, 10.0], [-3.1174490092936673, 3.9091574123401496, 10.0], [-4.504844339512095, 2.169418695587791, 10.0], [-5.0, 6.123233995736766e-16, 10.0], [-4.504844339512096, -2.16941869558779, 10.0], [-3.1174490092936686, -3.9091574123401482, 10.0], [-1.112604669781573, -4.874639560909118, 10.0], [1.1126046697815712, -4.874639560909118, 10.0], [3.117449009293667, -3.9091574123401496, 10.0], [4.504844339512095, -2.1694186955877917, 10.0], [4.504844339512096, 2.1694186955877908, 0.0], [3.1174490092936677, 3.909157412340149, 0.0], [1.1126046697815721, 4.874639560909118, 0.0], [-1.1126046697815717, 4.874639560909118, 0.0], [-3.1174490092936673, 3.9091574123401496, 0.0], [-4.504844339512095, 2.169418695587791, 0.0], [-5.0, 6.123233995736766e-16, 0.0], [-4.504844339512096, -2.16941869558779, 0.0], [-3.1174490092936686, -3.9091574123401482, 0.0], [-1.112604669781573, -4.874639560909118, 0.0], [1.1126046697815712, -4.874639560909118, 0.0], [3.117449009293667, -3.9091574123401496, 0.0], [4.504844339512095, -2.1694186955877917, 0.0]];
 
 // VietorisRips::<d, n> : compute the nth first homology modules in d-dimensional space
-let mut vr = VietorisRips::<3, 3>::init(sphere);
+let mut vr = VietorisRips::<3, 2>::init(two_circles);
 
 // vr.analyse(ring, radius limit, radius step)
-let data = vr.analyze(Ring::Z, 22.0, 0.5);
+let data = vr.analyze(Ring::R, 20.0, 0.5);
 for modules in data{
   println!("\nHOMOLOGICAL DATA ( persistence={} )", modules.end - module.start);
-  for i in 0..3{
+  for i in 0..2{
     println!("\tdim H_{} = {} | T(H_{}) = {:?}", i, modules.ranks[i],i, modules.torsions[i]);
   }
 }
@@ -36,50 +36,61 @@ for modules in data{
 
 ## Output
 ```
-HHOMOLOGICAL DATA ( persistence=7.5 )
-        dim H_0 = 9 | T(H_0) = []
-        dim H_1 = 0 | T(H_1) = []
-        dim H_2 = 0 | T(H_2) = []
-
 HOMOLOGICAL DATA ( persistence=2.5 )
-        dim H_0 = 7 | T(H_0) = []
+        dim H_0 = 26 | T(H_0) = []
         dim H_1 = 0 | T(H_1) = []
-        dim H_2 = 0 | T(H_2) = []
+
+HOMOLOGICAL DATA ( persistence=0.5 )
+        dim H_0 = 22 | T(H_0) = []
+        dim H_1 = 0 | T(H_1) = []
+
+HOMOLOGICAL DATA ( persistence=0.5 )
+        dim H_0 = 10 | T(H_0) = []
+        dim H_1 = 0 | T(H_1) = []
+
+HOMOLOGICAL DATA ( persistence=1 )
+        dim H_0 = 2 | T(H_0) = []
+        dim H_1 = 0 | T(H_1) = []
+
+HOMOLOGICAL DATA ( persistence=5.5 )
+        dim H_0 = 2 | T(H_0) = []
+        dim H_1 = 2 | T(H_1) = []
+
+HOMOLOGICAL DATA ( persistence=0.5 )
+        dim H_0 = 2 | T(H_0) = []
+        dim H_1 = 4 | T(H_1) = []
 
 HOMOLOGICAL DATA ( persistence=0.5 )
         dim H_0 = 1 | T(H_0) = []
-        dim H_1 = 6 | T(H_1) = []
-        dim H_2 = 0 | T(H_2) = []
+        dim H_1 = 14 | T(H_1) = []
 
-HOMOLOGICAL DATA ( persistence=1 )
+HOMOLOGICAL DATA ( persistence=1.5 )
         dim H_0 = 1 | T(H_0) = []
-        dim H_1 = 20 | T(H_1) = []
-        dim H_2 = 0 | T(H_2) = []
+        dim H_1 = 12 | T(H_1) = []
 
-HOMOLOGICAL DATA ( persistence=3 )
+HOMOLOGICAL DATA ( persistence=0.5 )
         dim H_0 = 1 | T(H_0) = []
-        dim H_1 = 3 | T(H_1) = []
-        dim H_2 = 0 | T(H_2) = []
+        dim H_1 = 10 | T(H_1) = []
 
-HOMOLOGICAL DATA ( persistence=3 )
+HOMOLOGICAL DATA ( persistence=0.5 )
         dim H_0 = 1 | T(H_0) = []
-        dim H_1 = 1 | T(H_1) = []
-        dim H_2 = 0 | T(H_2) = []
+        dim H_1 = 4 | T(H_1) = []
 
-HOMOLOGICAL DATA ( persistence=4 )
+HOMOLOGICAL DATA ( persistence=7 )
         dim H_0 = 1 | T(H_0) = []
         dim H_1 = 0 | T(H_1) = []
-        dim H_2 = 1 | T(H_2) = []
 ```
-We see that the two most persistent topological features are:
-* The homology of the discrete point cloud
-    - $$H_0(V_\epsilon)=\mathbb{Z}^9$$
-    - $$H_1(V_\epsilon)=0$$
-    - $$H_2(V_\epsilon)=0$$
-* The homology of the sphere $$S^2$$
+We see that the three most persistent topological features are:
+* The homology of two circles
+    - $$H_0(V_\epsilon)=\mathbb{Z}^2$$
+    - $$H_1(V_\epsilon)=\mathbb{Z}^2$$
+* The homology of the initial discrete point clouds
+  - $$H_0(V_\epsilon)=\mathbb{Z}^{26}$$
+  - $$H_1(V_\epsilon)=0$$
+* The homology of the ending simplicial complex (homotopic to a point)
   - $$H_0(V_\epsilon)=\mathbb{Z}$$
   - $$H_1(V_\epsilon)=0$$
-  - $$H_2(V_\epsilon)=\mathbb{Z}$$
+
  
 ## More Examples
 You can compute the $$\mathbb{Z}$$ or $$\mathbb{R}$$ simplicial homology of a few samples.
