@@ -73,8 +73,6 @@ impl SmithNormalForm<'_>{
 }
 
 pub fn step(snf: &mut SmithNormalForm) -> SNF_STATE{
-	//println!("init: {}", snf.m);
-
 	match snf.norm_min_pos(){
 		None => Halt("halted: M=0"),
 		Some((pos,a)) => {
@@ -91,7 +89,6 @@ pub fn step(snf: &mut SmithNormalForm) -> SNF_STATE{
 				},
 				Some((i,0)) => {
 					let q = snf.m[(i,0)].div_euclid(a);
-					////println!("{}={}*{} + {}", snf.m[(i,0)],q,a,r);
 					snf.e1_ij(i,0,-q);
 					GoToInitial
 				},
